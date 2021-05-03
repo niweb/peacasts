@@ -2,12 +2,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Home",
+  name: "404",
 });
 </script>
 
 <template>
   <div>
-    <h1>Peacasts</h1>
+    <h1>404</h1>
+    <p>Sorry, the page you have requested could not be found.</p>
   </div>
 </template>

@@ -1,0 +1,44 @@
+/** -- Reset all styles ----*/
+@import "~reset-css/sass/reset";
+
+/** -- Font ----------------*/
+@import "~@fontsource/roboto/index.css";
+body {
+  font-family: "San Francisco UI", "Roboto", "Helvetica Neue", "sans-serif";
+}
+
+/** -- Element UI Theming --*/
+// See https://element-plus.org/#/en-US/component/custom-theme
+$--color-primary: #627b0f;
+
+$--font-path: "~element-plus/lib/theme-chalk/fonts"; // icon font path
+@import "~element-plus/packages/theme-chalk/src/index"; // element ui styles
+
+/** -- Typography ----------*/
+body {
+  font-size: 1.2rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.7rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.3rem;
+}
