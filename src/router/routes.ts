@@ -1,13 +1,29 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import { Paths } from "@/router/paths";
-import Home from "@/views/Home.vue";
+import Explore from "@/views/Explore.vue";
 import NotFound from "@/views/NotFound.vue";
+import Episode from "@/views/RandomEpisode.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: Paths.HOME,
-    component: Home,
+    name: Paths.EXPLORE,
+    component: Explore,
+  },
+  {
+    path: "/explore",
+    name: Paths.EXPLORE,
+    component: Explore,
+  },
+  {
+    path: "/episode",
+    name: Paths.EPISODE,
+    component: Episode,
+  },
+  {
+    path: "/podcast",
+    name: Paths.PODCAST,
+    component: Episode,
   },
   {
     path: "/:pathMatch(.*)",

@@ -16,27 +16,33 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="root">
-    <nav>
+  <el-container class="root">
+    <el-header>
       <el-menu mode="horizontal" router :default-active="currentRoute.name">
-        <el-menu-item :route="{ name: Paths.HOME }" :index="Paths.HOME">
-          Home
+        <el-menu-item :route="{ name: Paths.EXPLORE }" :index="Paths.EXPLORE">
+          Explore
+        </el-menu-item>
+        <el-menu-item :route="{ name: Paths.EPISODE }" :index="Paths.EPISODE">
+          Random Episode
         </el-menu-item>
       </el-menu>
-    </nav>
-    <main>
+    </el-header>
+    <el-main>
       <router-view />
-    </main>
-  </div>
+    </el-main>
+    <el-footer>
+      Todo: Insert
+      <a
+        href="https://www.dropbox.com/sh/259hp0metmemgbs/AACsZHZa1xhq7OkrycHmBK27a?dl=0"
+      >
+        ListenAPI Logo</a
+      >
+    </el-footer>
+  </el-container>
 </template>
 
 <style lang="scss" scoped>
 .root {
-  width: 100vw;
-  height: 100vh;
-}
-
-main {
   width: 100vw;
   height: 100vh;
 }

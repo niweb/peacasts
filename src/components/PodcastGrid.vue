@@ -1,0 +1,51 @@
+<script lang="ts">
+import { defineComponent, PropType } from "vue";
+import { Podcast } from "@/services/listen-api/types";
+
+export default defineComponent({
+  name: "PodcastGrid",
+
+  props: {
+    items: {
+      type: Array as PropType<Podcast[]>,
+      default: () => [],
+    },
+  },
+
+  setup() {
+    return {
+      openPodcastDetailPage(podcast: Podcast) {
+        console.log(podcast);
+        // router.push({ name: 'user', params: { userId: '123' } })
+      },
+    };
+  },
+});
+</script>
+
+<template>
+  <div class="grid">
+    <el-card
+      v-for="item in items"
+      :key="item.id"
+      shadow="hover"
+      class="card"
+      @click="openPodcastDetailPage(item)"
+    >
+      <el-image :src="item.image" class="image" :alt="item.title"> </el-image>
+    </el-card>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+.card {
+  cursor: pointer;
+}
+</style>

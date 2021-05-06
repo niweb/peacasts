@@ -27,5 +27,14 @@ export type Episode = {
   listennotes_edit_url: Url;
 };
 
-type Url = string;
-type DateTime = number;
+export type Genre = {
+  id: number;
+  name: string;
+  parent_id: Genre["id"];
+};
+
+export type Region = "us";
+export type Language = "English";
+
+export type Url = string;
+export type DateTime = number;

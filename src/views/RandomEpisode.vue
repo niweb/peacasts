@@ -4,7 +4,7 @@ import { client } from "@/services/listen-api/client";
 import { Episode } from "@/services/listen-api/types";
 
 export default defineComponent({
-  name: "Home",
+  name: "RandomEpisode",
   setup() {
     const loading = ref(true);
     const episode = ref<Episode | null>(null);
@@ -32,8 +32,5 @@ export default defineComponent({
       <el-image :src="episode.image" :fit="fit"> </el-image>
       <pre>{{ episode }}</pre>
     </template>
-    <pre>
-Todo: Insert ListenAPI Logo https://www.dropbox.com/sh/259hp0metmemgbs/AACsZHZa1xhq7OkrycHmBK27a?dl=0</pre
-    >
   </div>
 </template>
