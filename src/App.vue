@@ -17,7 +17,7 @@ export default defineComponent({
 
 <template>
   <el-container class="root">
-    <el-header>
+    <el-header class="header">
       <el-menu mode="horizontal" router :default-active="currentRoute.name">
         <el-menu-item :route="{ name: Paths.EXPLORE }" :index="Paths.EXPLORE">
           Explore
@@ -45,5 +45,8 @@ export default defineComponent({
 .root {
   width: 100vw;
   height: 100vh;
+}
+.header {
+  margin: 0;
 }
 </style>

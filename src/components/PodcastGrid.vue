@@ -1,6 +1,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { Podcast } from "@/services/listen-api/types";
+import { useRouter } from "vue-router";
+import { Paths } from "@/router/paths";
 
 export default defineComponent({
   name: "PodcastGrid",
@@ -13,10 +15,10 @@ export default defineComponent({
   },
 
   setup() {
+    const router = useRouter();
     return {
       openPodcastDetailPage(podcast: Podcast) {
-        console.log(podcast);
-        // router.push({ name: 'user', params: { userId: '123' } })
+        router.push({ name: Paths.PODCAST, params: { podcastId: podcast.id } });
       },
     };
   },

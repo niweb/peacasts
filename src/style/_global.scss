@@ -1,0 +1,47 @@
+/** -- Reset all styles ----*/
+@import "~reset-css/sass/reset";
+
+/** -- Typography ----------*/
+@import "~@fontsource/roboto/index.css";
+
+body {
+  font-family: "Roboto", "Helvetica Neue", "sans-serif";
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 3.2rem;
+  font-weight: bold;
+  margin-bottom: 1.8rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 2.8rem;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 2.2rem;
+}
+
+h4 {
+  font-size: 1.7rem;
+  line-height: 2rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  line-height: 1.7rem;
+}
+
+h6 {
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+}
+
+p {
+  text-align: justify;
+}

@@ -35,7 +35,11 @@ declare module "podcast-api" {
       safe_mode?: boolean;
     }): Promise<{ data: { podcasts: Podcast[] } }>;
 
-    fetchPodcastById(): Promise<unknown>;
+    fetchPodcastById(options: {
+      id: string;
+      next_episode_pub_date?: DateTime;
+      sort?: "recent_first" | "oldest_first";
+    }): Promise<{ data: Podcast }>;
 
     fetchEpisodeById(): Promise<unknown>;
 

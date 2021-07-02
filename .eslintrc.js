@@ -18,6 +18,7 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "unused-imports/no-unused-imports": "error",
+    "vue/no-v-html": "off",
     "vue/component-tags-order": [
       "error",
       {

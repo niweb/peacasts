@@ -2,13 +2,14 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import { Paths } from "@/router/paths";
 import Explore from "@/views/Explore.vue";
 import NotFound from "@/views/NotFound.vue";
-import Episode from "@/views/RandomEpisode.vue";
+import PodcastDetail from "@/views/PodcastDetail.vue";
+import RandomEpisode from "@/views/RandomEpisode.vue";
+import EpisodeDetail from "@/views/EpisodeDetail.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: Paths.EXPLORE,
-    component: Explore,
+    redirect: { name: Paths.EXPLORE },
   },
   {
     path: "/explore",
@@ -16,14 +17,19 @@ const routes: Array<RouteRecordRaw> = [
     component: Explore,
   },
   {
-    path: "/episode",
-    name: Paths.EPISODE,
-    component: Episode,
+    path: "/random",
+    name: Paths.RANDOM,
+    component: RandomEpisode,
   },
   {
-    path: "/podcast",
+    path: "/podcast/:podcastId",
     name: Paths.PODCAST,
-    component: Episode,
+    component: PodcastDetail,
+  },
+  {
+    path: "/podcast/:podcastId/episode/:episodeId",
+    name: Paths.EPISODE,
+    component: EpisodeDetail,
   },
   {
     path: "/:pathMatch(.*)",

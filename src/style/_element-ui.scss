@@ -1,0 +1,10 @@
+// Import this apps variables
+@import "variables";
+
+// Override Element UIs Variables
+// See https://element-plus.org/#/en-US/component/custom-theme
+$--color-primary: $color-primary;
+$--color-text-secondary: $color-grey-600;
+
+$--font-path: "~element-plus/lib/theme-chalk/fonts"; // icon font path
+@import "~element-plus/packages/theme-chalk/src/index"; // element ui styles

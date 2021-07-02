@@ -4,9 +4,30 @@ export type Podcast = {
   title: string;
   publisher: string;
   thumbnail: Url;
-  listen_score: number;
   listennotes_url: Url;
-  listen_score_global_rank: string;
+  itunes_id: number;
+  language: Language;
+  country: Region;
+  genre_ids: Genre[];
+  latest_pub_date_ms: DateTime;
+  earliest_pub_date_ms: DateTime;
+  total_episodes: number;
+  website: Url;
+  extra: {
+    twitter_handle: Url;
+    facebook_handle: Url;
+    instagram_handle: Url;
+    wechat_handle: Url;
+    patreon_handle: Url;
+    youtube_url: Url;
+    linkedin_url: Url;
+    spotify_url: Url;
+    google_url: Url;
+    url1: Url;
+    url2: Url;
+    url3: Url;
+  };
+  episodes: Episode[];
 };
 
 export type Episode = {
