@@ -2,9 +2,11 @@
 import { defineComponent, onMounted, ref } from "vue";
 import { client } from "@/services/listen-api/client";
 import { Episode } from "@/services/listen-api/types";
+import LoadingOverlay from "@/components/LoadingOverlay.vue";
 
 export default defineComponent({
   name: "RandomEpisode",
+  components: { LoadingOverlay },
   setup() {
     const loading = ref(true);
     const episode = ref<Episode | null>(null);
@@ -27,10 +29,9 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>Peacasts</h1>
-    <template v-if="episode">
+    <LoadingOverlay :show="!episode">
       <el-image :src="episode.image" :fit="fit"> </el-image>
       <pre>{{ episode }}</pre>
-    </template>
+    </LoadingOverlay>
   </div>
 </template>

@@ -22,7 +22,7 @@ export default defineComponent({
         <el-menu-item :route="{ name: Paths.EXPLORE }" :index="Paths.EXPLORE">
           Explore
         </el-menu-item>
-        <el-menu-item :route="{ name: Paths.EPISODE }" :index="Paths.EPISODE">
+        <el-menu-item :route="{ name: Paths.RANDOM }" :index="Paths.RANDOM">
           Random Episode
         </el-menu-item>
       </el-menu>

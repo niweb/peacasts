@@ -2,11 +2,12 @@
 import { defineComponent, onMounted, ref } from "vue";
 import { client } from "@/services/listen-api/client";
 import { Podcast } from "@/services/listen-api/types";
-import PodcastList from "@/components/PodcastGrid.vue";
+import PodcastGrid from "@/components/PodcastGrid.vue";
+import LoadingOverlay from "@/components/LoadingOverlay.vue";
 
 export default defineComponent({
   name: "Explore",
-  components: { PodcastList },
+  components: { LoadingOverlay, PodcastGrid },
   setup() {
     const loading = ref(true);
     const podcasts = ref<Podcast[] | null>(null);
@@ -29,8 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <h1>Peacasts</h1>
-    <PodcastList :items="podcasts" />
-  </div>
+  <LoadingOverlay :show="!podcasts">
+    <PodcastGrid :items="podcasts" />
+  </LoadingOverlay>
 </template>
