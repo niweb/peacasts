@@ -90,7 +90,6 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-@import "@/style/_variables.scss";
 .root {
   max-width: 850px;
   margin: 3rem auto auto;
