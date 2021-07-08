@@ -41,10 +41,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-around;
+  grid-gap: 20px;
 }
 
 .card {

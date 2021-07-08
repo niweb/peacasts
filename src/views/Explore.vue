@@ -11,26 +11,46 @@ export default defineComponent({
   setup() {
     const loading = ref(true);
     const podcasts = ref<Podcast[] | null>(null);
-    onMounted(async () => {
+    const page = ref(1);
+
+    const fetchPodcasts = async () => {
+      loading.value = true;
       try {
-        const response = await client.fetchBestPodcasts();
-        podcasts.value = response.data.podcasts;
-        loading.value = false;
+        const response = await client.fetchBestPodcasts({ page: page.value });
+        const newPodcasts = response.data.podcasts;
+        podcasts.value = [...(podcasts.value || []), ...newPodcasts];
       } catch (e) {
         console.error(e);
+      } finally {
+        loading.value = false;
       }
+    };
+
+    onMounted(async () => {
+      await fetchPodcasts();
     });
 
     return {
       loading,
       podcasts,
+      load: async () => {
+        page.value++;
+        await fetchPodcasts();
+      },
     };
   },
 });
 </script>
 
 <template>
-  <LoadingOverlay :show="!podcasts">
-    <PodcastGrid :items="podcasts" />
+  <LoadingOverlay :show="loading">
+    <PodcastGrid
+      v-infinite-scroll="load"
+      :v-loading="loading"
+      :infinite-scroll-disabled="loading"
+      :infinite-scroll-immediate="false"
+      :infinite-scroll-distance="500"
+      :items="podcasts"
+    />
   </LoadingOverlay>
 </template>

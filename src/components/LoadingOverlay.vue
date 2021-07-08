@@ -15,7 +15,7 @@ export default defineComponent({
 
 <template>
   <div v-if="show" v-loading="true" class="overlay"></div>
-  <slot v-else></slot>
+  <slot></slot>
 </template>
 
 <style lang="scss" scoped>

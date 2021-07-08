@@ -46,7 +46,7 @@ export default defineComponent({
 
 <template>
   <LoadingOverlay :show="!podcast">
-    <div class="root">
+    <div v-if="podcast" class="root">
       <el-row :gutter="80">
         <el-col :span="8">
           <el-image :src="podcast.image" class="image"></el-image>
