@@ -4,11 +4,12 @@ import { useRoute } from "vue-router";
 import { client } from "@/services/listen-api/client";
 import { Podcast } from "@/services/listen-api/types";
 import LoadingOverlay from "@/components/LoadingOverlay.vue";
+import ShowMoreText from "@/components/ShowMoreText.vue";
 import dayjs from "dayjs";
 
 export default defineComponent({
   name: "PodcastDetail",
-  components: { LoadingOverlay },
+  components: { LoadingOverlay, ShowMoreText },
   setup() {
     const route = useRoute();
     const id = route.params.podcastId as string;
@@ -51,7 +52,11 @@ export default defineComponent({
         <el-col :span="8">
           <el-image :src="podcast.image" class="image"></el-image>
           <p class="total-episodes">{{ podcast.total_episodes }} Episodes</p>
-          <p class="description" v-html="podcast.description"></p>
+          <ShowMoreText
+            class="description"
+            :text="podcast.description"
+            :lines="6"
+          ></ShowMoreText>
         </el-col>
         <el-col :span="16">
           <h1>{{ podcast.title }}</h1>
@@ -81,7 +86,10 @@ export default defineComponent({
               <span>{{ printLength(episode.audio_length_sec) }}</span>
             </div>
             <h2 class="title">{{ episode.title }}</h2>
-            <p class="description" v-html="episode.description"></p>
+            <ShowMoreText
+              class="description"
+              :text="episode.description"
+            ></ShowMoreText>
           </el-card>
         </el-col>
       </el-row>
@@ -91,7 +99,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .root {
-  max-width: 850px;
+  max-width: 900px;
   margin: 3rem auto auto;
 }
 .image {
@@ -112,7 +120,8 @@ export default defineComponent({
   .icon {
     margin-right: 0.5rem;
   }
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  margin-bottom: 1.8rem;
 }
 .episode {
   &:not(:last-child) {
@@ -121,6 +130,7 @@ export default defineComponent({
 
   .overline {
     font-size: smaller;
+    margin-bottom: 0.4rem;
     color: $color-grey-600;
 
     :not(:last-child) {

@@ -20,6 +20,7 @@ export default defineComponent({
   font-style: normal;
   font-size: 20px; /* Preferred icon size */
   display: inline-block;
+  vertical-align: text-bottom;
   line-height: 1;
   text-transform: none;
   letter-spacing: normal;
