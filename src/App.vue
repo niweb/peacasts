@@ -19,11 +19,14 @@ export default defineComponent({
   <el-container class="root">
     <el-header class="header">
       <el-menu mode="horizontal" router :default-active="currentRoute.name">
+        <el-menu-item
+          :route="{ name: Paths.MY_PODCASTS }"
+          :index="Paths.MY_PODCASTS"
+        >
+          My Podcasts
+        </el-menu-item>
         <el-menu-item :route="{ name: Paths.EXPLORE }" :index="Paths.EXPLORE">
           Explore
-        </el-menu-item>
-        <el-menu-item :route="{ name: Paths.RANDOM }" :index="Paths.RANDOM">
-          Random Episode
         </el-menu-item>
       </el-menu>
     </el-header>

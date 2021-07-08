@@ -1,19 +1,25 @@
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { client } from "@/services/listen-api/client";
 import { Podcast } from "@/services/listen-api/types";
 import LoadingOverlay from "@/components/LoadingOverlay.vue";
 import ShowMoreText from "@/components/ShowMoreText.vue";
-import dayjs from "dayjs";
+import EpisodeCard from "@/components/EpisodeCard.vue";
+import {
+  addPodcast,
+  isPodcastAdded,
+  removePodcast,
+} from "@/services/storage/podcasts";
 
 export default defineComponent({
   name: "PodcastDetail",
-  components: { LoadingOverlay, ShowMoreText },
+  components: { EpisodeCard, LoadingOverlay, ShowMoreText },
   setup() {
     const route = useRoute();
     const id = route.params.podcastId as string;
     const podcast = ref<Podcast>();
+    const isAdded = ref<boolean | null>(null);
 
     onMounted(async () => {
       try {
@@ -24,21 +30,37 @@ export default defineComponent({
       }
     });
 
+    watch(podcast, async () => {
+      if (podcast.value) {
+        isAdded.value = await isPodcastAdded(podcast.value.id);
+      }
+    });
+
     return {
-      dayjs,
       podcast,
       itunesUrl: computed(
         () =>
           `https://podcasts.apple.com/us/podcast/id${podcast.value?.itunes_id}`
       ),
 
-      printDate(ms: number) {
-        return dayjs(ms).format("MMM DD, YYYY");
+      isAdded,
+
+      add: async () => {
+        if (podcast.value) {
+          await addPodcast(podcast.value);
+          isAdded.value = true;
+        } else {
+          console.error("Sorry, something went wrong.");
+        }
       },
 
-      printLength(seconds: number) {
-        const min = Math.round(seconds / 60);
-        return `${min} min`;
+      remove: async () => {
+        if (podcast.value) {
+          await removePodcast(podcast.value.id);
+          isAdded.value = false;
+        } else {
+          console.error("Sorry, something went wrong.");
+        }
       },
     };
   },
@@ -59,7 +81,25 @@ export default defineComponent({
           ></ShowMoreText>
         </el-col>
         <el-col :span="16">
-          <h1>{{ podcast.title }}</h1>
+          <div class="headline-wrapper">
+            <h1>{{ podcast.title }}</h1>
+            <el-button
+              v-if="isAdded"
+              type="primary"
+              icon="el-icon-check"
+              circle
+              aria-label="Remove from your podcasts"
+              @click="remove"
+            ></el-button>
+            <el-button
+              v-else
+              type="primary"
+              icon="el-icon-plus"
+              circle
+              aria-label="Add to your podcasts"
+              @click="add"
+            ></el-button>
+          </div>
           <div class="references">
             <div>
               <i class="el-icon-mic icon"></i
@@ -74,23 +114,13 @@ export default defineComponent({
               <a :href="itunesUrl">Apple Podcasts</a>
             </div>
           </div>
-          <el-card
+          <EpisodeCard
             v-for="episode in podcast.episodes"
             :key="episode.id"
             class="episode"
+            :episode="episode"
           >
-            <div class="overline">
-              <span class="release-date">
-                {{ printDate(episode.pub_date_ms) }}
-              </span>
-              <span>{{ printLength(episode.audio_length_sec) }}</span>
-            </div>
-            <h2 class="title">{{ episode.title }}</h2>
-            <ShowMoreText
-              class="description"
-              :text="episode.description"
-            ></ShowMoreText>
-          </el-card>
+          </EpisodeCard>
         </el-col>
       </el-row>
     </div>
@@ -110,6 +140,11 @@ export default defineComponent({
   margin-bottom: 1rem;
   color: $color-grey-600;
 }
+.headline-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
 .references {
   display: flex;
   align-items: baseline;
@@ -123,28 +158,7 @@ export default defineComponent({
   font-size: 1rem;
   margin-bottom: 1.8rem;
 }
-.episode {
-  &:not(:last-child) {
-    margin-bottom: 1.5rem;
-  }
-
-  .overline {
-    font-size: smaller;
-    margin-bottom: 0.4rem;
-    color: $color-grey-600;
-
-    :not(:last-child) {
-      margin-right: 1rem;
-    }
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .description {
-    text-align: left;
-    font-size: 1.1rem !important;
-  }
+.episode:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 </style>

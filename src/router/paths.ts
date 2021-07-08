@@ -4,5 +4,6 @@ export enum Paths {
   EPISODE = "EPISODE",
   PODCAST = "PODCAST",
   EXPLORE = "EXPLORE",
+  MY_PODCASTS = "MY_PODCASTS",
   NOT_FOUND = "404",
 }
